@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Random Messages",
+    "version": "1.0",
+    "description": "Affiche des messages aléatoires à intervalles réguliers.",
+    "permissions": [
+        "storage",
+        "tabs"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": "Images/devil.png"
+    },
+    "icons": {
+        "16": "Images/devil.png",
+        "32": "Images/devil.png",
+        "128": "Images/devil.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    }
+}

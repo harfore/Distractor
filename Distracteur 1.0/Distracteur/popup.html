@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Popup Distracteur</title>
+    <link rel="stylesheet" href="popup.css">
+    <script type="module" src="popup.js"></script>
+</head>
+
+<body>
+    <div id="content">
+        <h1 id="message"> Le Distracteur 1.0 <img id="devil" src="images/devil.png" title="MOOOUUHahAAHHhaahahaha"
+                alt="tete de diable"></h1>
+        <div id="options">
+            <button title="genere une video distrayante" id="videoOption" class="column1">Videos</button>
+            <button title="genere une musique distrayante" id="musiqueOption" class="column1">Musiques</button>
+            <button title="genere un article distrayante" id="articleOption" class="column2">Article</button>
+            <button title="genere un jeux distrayant" id="jeuxOption" class="column2">Jeux</button>
+        </div>
+        <div id="like">
+            <button title="Ajoute ce lien a tes favoris" id="likeBtn">Like</button>
+            <button title="Supprime ce lien de la liste" id="dislikeBtn">Dislike</button>
+            <select id="likedResourcesDropdown" style="display: none;">
+                <option value="default">Favoris</option>
+            </select>
+        </div>
+
+        <img id="musique" style="display: none;" />
+        <video id="video" width="320" height="240" style="display: none;" controls></video>
+    </div>
+</body>
+
+</html>

@@ -59,28 +59,55 @@ const resources = {
 };
 
 // Fonction pour récupérer les images depuis l'API
+let choice = true
 function fetchImagesFromAPI() {
-  fetch("https://dog.ceo/api/breeds/image/random")
-    .then(function (response) {
-      if (response.ok) {
-        return response.json();
-      } else {
-        console.log("Erreur de récupération de l'image depuis l'API");
-        return null;
-      }
-    })
-    .then(data => {
-      if (data) {
-        // Ajouter l'image à la liste des ressources
-        let dataImage;
-        dataImage = data.message
-        resources.imageUrls.push(dataImage);
-        console.log("Image récupérée avec succès :", dataImage);
-      }
-    })
-    .catch(error => {
-      console.error("Erreur lors de la requête API :", error);
-    });
+  if (choice === true) {
+    fetch("https://dog.ceo/api/breeds/image/random")
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.log("Erreur de récupération de l'image depuis l'API");
+          return null;
+        }
+      })
+      .then(data => {
+        if (data) {
+          // Ajouter l'image à la liste des ressources
+          let dataImage;
+          dataImage = data.message
+          resources.imageUrls.push(dataImage);
+          console.log("Image récupérée avec succès :", dataImage);
+        }
+      })
+      .catch(error => {
+        console.error("Erreur lors de la requête API :", error);
+      });
+    choice = false
+  }
+  else if (choice === false) {
+    fetch("https://api.thecatapi.com/v1/images/search")
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.log("Erreur de récupération de l'image depuis l'API");
+          return null;
+        }
+      })
+      .then(data => {
+        if (data) {
+          // Ajouter l'image à la liste des ressources
+          dataImage = data[0].url
+          resources.imageUrls.push(dataImage);
+          console.log("Image récupérée avec succès :", dataImage);
+        }
+      })
+      .catch(error => {
+        console.error("Erreur lors de la requête API :", error);
+      });
+    choice = true
+  }
 }
 
 // Appeler la fonction pour récupérer une image

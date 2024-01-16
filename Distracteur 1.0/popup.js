@@ -3,8 +3,8 @@ import resources from './resources.js';
 // Maintenant, vous pouvez utiliser les URLs comme ceci :
 let musiqueUrls = resources.musiqueUrls
 let videoUrls = resources.videoUrls
-const articleUrls = resources.articlesUrls
-const jeuxUrls = resources.jeuxUrls
+let articleUrls = resources.articlesUrls
+let jeuxUrls = resources.jeuxUrls
 
 let newPopupWindowId;
 let currentWindow;
@@ -68,47 +68,45 @@ function addLikedResourceToDropdown(url) {
     likedResourcesDropdown.appendChild(option);
 }
 
-// const dislikeResource = () => {
-//     // const currentUrl = window.location.href;
-//     let currentUrl = '';
-//     getCurrentResourceUrl(function (currentUrl) {
-//         dislikedUrls.push(currentUrl);
-//     });
-//     console.log(`${currentUrl} disliked!`);
-//     dislikedUrls.push(currentUrl);
-//     if (musiqueUrls.includes(currentUrl)) {
-//         musiqueUrls = musiqueUrls.filter(function (item) {
-//             return item !== currentUrl;
-//         });
-//     } else {
-//         console.log('Not the right field!')
-//     }
-//     console.log('Updated musiqueUrls:', musiqueUrls)
-// }
-
 function dislikeResource() {
-    getCurrentResourceUrl(function (currentUrl) {
-        let correctedLink = currentUrl.replace("www.", "").replace("youtube", "youtu.be").replace(".com", "").replace("watch?v=", "");
-        console.log(correctedLink + ' is number one.');
+    try {
+        getCurrentResourceUrl(function (currentUrl) {
+            let correctedLink = "";
+            if (currentUrl.includes("youtube" || "youtu.be")) {
+                let correctedLink = currentUrl.replace("www.", "").replace("youtube", "youtu.be").replace(".com", "").replace("watch?v=", "");
+                console.log('Link after changes: ' + correctedLink);
+            } else {
+                correctedLink = currentUrl;
+            }
+            dislikedUrls.push(correctedLink);
+            let hasCommonValue = dislikedUrls.some(correctedLink => musiqueUrls.includes(correctedLink)); // boolean
+            let hasCommonValue2 = dislikedUrls.some(correctedLink => videoUrls.includes(correctedLink));
+            let hasCommonValue3 = dislikedUrls.some(correctedLink => articleUrls.includes(correctedLink));
+            let hasCommonValue4 = dislikedUrls.some(correctedLink => jeuxUrls.includes(correctedLink));
 
-        dislikedUrls.push(correctedLink);
-        console.log(correctedLink)
-        let hasCommonValue = [];
-        let hasCommonValue2 = [];
-        hasCommonValue = dislikedUrls.some(correctedLink => musiqueUrls.includes(correctedLink)); // boolean
-        hasCommonValue2 = dislikedUrls.some(correctedLink => videoUrls.includes(correctedLink));
-        if (hasCommonValue) {
-            musiqueUrls = musiqueUrls.filter(item => item !== correctedLink);
-            console.log(`${correctedLink} disliked!`)
-            console.log('Updated musique URLs: ', musiqueUrls);
-        } else if (hasCommonValue2) {
-            videoUrls = videoUrls.filter(item => item !== correctedLink);
-            console.log('Updated Video URLs: ', videoUrls);
-        } else {
-            console.log("No common value found with dislikedUrls.")
-        }
-    });
-}
+
+            if (hasCommonValue) {
+                musiqueUrls = musiqueUrls.filter(item => item !== correctedLink);
+                console.log(`${correctedLink} disliked!`)
+                console.log('Updated musique URLs: ', musiqueUrls);
+            } else if (hasCommonValue2) {
+                videoUrls = videoUrls.filter(item => item !== correctedLink);
+                console.log('Updated Video URLs: ', videoUrls);
+            } else if (hasCommonValue3) {
+                articleUrls = articleUrls.filter(item => item !== correctedLink);
+                console.log('Updated article URLs: ', articleUrls)
+            } else if (hasCommonValue4) {
+                jeuxUrls = jeuxUrls.filter(item => item !== correctedLink);
+                console.log('Updated game URLs: ', jeuxUrls)
+            } else {
+                console.log("Sorry, no common value found with dislikedUrls.")
+            }
+        });
+    } catch (error) {
+        console.error('An error occured while getting the current resorce URL:', error.message)
+    }
+};
+
 
 function changeMessageType(type) {
     messageType = type;

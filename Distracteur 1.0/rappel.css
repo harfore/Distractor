@@ -1,0 +1,35 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: large;
+    background-color: #000000;
+    margin: 0;
+    padding: 10px;
+    /* Ajuste la valeur de padding pour réduire la hauteur */
+    color: #ecf0f1;
+    z-index: 999999;
+}
+
+body {
+    color: hsl(242, 48%, 48%);
+    animation: wheelHueColor 100s infinite;
+    background-color: currentColor;
+}
+
+@supports (background-blend-mode: overlay) {
+    body {
+        background-image: linear-gradient(45deg, white 10%, black 90%);
+        background-blend-mode: overlay;
+    }
+}
+
+h1 {
+    padding: auto;
+    color: white;
+}
+
+#devil {
+    margin-left: 50px;
+    margin-top: -40px;
+    height: 80px;
+    width: auto
+}

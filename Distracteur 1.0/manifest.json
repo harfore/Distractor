@@ -4,8 +4,17 @@
     "version": "1.0",
     "description": "Affiche des messages aléatoires à intervalles réguliers.",
     "permissions": [
+        "tabs",
+        "activeTab",
         "storage",
-        "tabs"
+        "notifications",
+        "webNavigation",
+        "webRequest",
+        "contextMenus",
+        "unlimitedStorage",
+        "storage",
+        "declarativeContent",
+        "background"
     ],
     "action": {
         "default_popup": "popup.html",

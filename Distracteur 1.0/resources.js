@@ -27,8 +27,7 @@ const resources = {
     "https://youtu.be/VbeM8Lf7s5A",
     "https://youtu.be/oXAsvg_ZZzk",
     "https://youtu.be/TyUA1OmXMXA",
-    "https://youtu.be/cqGjhVJWtEg",
-    'https://youtu.be/qh6K0z7-700&t=1s'
+    "https://youtu.be/cqGjhVJWtEg"
   ],
   articlesUrls: [
     "https://www.legorafi.fr/category/horoscope-2/",
@@ -40,7 +39,6 @@ const resources = {
     "https://www.legorafi.fr/2024/01/11/gabriel-attal-surprend-tout-le-monde-en-arrivant-a-matignon-en-abaya/",
     "https://www.legorafi.fr/2024/01/10/jo-2024-pour-donner-une-bonne-image-de-paris-anne-hidalgo-va-organiser-un-grand-toilettage-des-rats-de-la-capitale/",
     "https://www.legorafi.fr/2023/12/21/noel-faut-il-mentir-a-ses-enfants-ou-leur-reveler-que-le-pere-noel-est-un-male-blanc-de-plus-de-50-ans/",
-    'https://www.criticalimprov.com/index.php/csieci/article/view/850/1411',
     "https://www.liberties.eu/fr/stories/halden-the-world-s-most-humane-prison/11089"
   ],
   jeuxUrls: [
@@ -55,7 +53,67 @@ const resources = {
     "https://www.jesuisundev.com/across-multiverse/",
     "https://www.16personalities.com/fr/test-de-personnalite",
     "https://www.queeringthemap.com/"
-  ]
+  ],
+  imageUrls: [],
+  anecdoteUrls: []
 };
 
+// Fonction pour récupérer les images depuis l'API
+function fetchImagesFromAPI() {
+  fetch("https://dog.ceo/api/breeds/image/random")
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      } else {
+        console.log("Erreur de récupération de l'image depuis l'API");
+        return null;
+      }
+    })
+    .then(data => {
+      if (data) {
+        // Ajouter l'image à la liste des ressources
+        let dataImage;
+        dataImage = data.message
+        resources.imageUrls.push(dataImage);
+        console.log("Image récupérée avec succès :", dataImage);
+      }
+    })
+    .catch(error => {
+      console.error("Erreur lors de la requête API :", error);
+    });
+}
+
+// Appeler la fonction pour récupérer une image
+fetchImagesFromAPI();
+
+// Utiliser la liste des ressources dans le reste de ton code
+// Par exemple, tu peux utiliser la première image ainsi :
+let firstImage = resources.imageUrls[0]
+console.log("DataImage :", firstImage);
+
+// va chercher une fun fact dans une API
+let dataAnecdote;
+let content;
+function fetchTextFromAPI() {
+  fetch("https://uselessfacts.jsph.pl/api/v2/facts/random").then(function (response) {
+    if (response.ok) {
+      return response.json()
+    }
+    console.log("success!", response)
+  })
+
+    .then(data => {
+      dataAnecdote = data.text
+      resources.anecdoteUrls.push(dataAnecdote);
+      console.log("Anecdote récupérée avec succès :", dataAnecdote);
+      // content = `<html><style>body{background-color:darkmagenta; color:white;}</style><body><p> ${dataAnecdote}</p></body></html>`
+      // content += `<style>body{display:flex; justify-content:center; align-items:center;}</style>`
+      // content += `<style>p{font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:25px;}</style>`
+      // content += `<style>p{text-align:center; padding:25px;}</style>`
+    })
+}
+console.log("dataAnecdote: " + dataAnecdote)
+
+fetchTextFromAPI()
+export { fetchImagesFromAPI, fetchTextFromAPI };
 export default resources;

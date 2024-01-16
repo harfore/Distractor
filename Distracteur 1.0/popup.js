@@ -1,10 +1,13 @@
 import resources from './resources.js';
+import { fetchImagesFromAPI, fetchTextFromAPI } from './resources.js';
 
 // Maintenant, vous pouvez utiliser les URLs comme ceci :
 let musiqueUrls = resources.musiqueUrls
 let videoUrls = resources.videoUrls
 let articleUrls = resources.articlesUrls
 let jeuxUrls = resources.jeuxUrls
+const anecdoteUrls = resources.anecdoteUrls
+const imageUrls = resources.imageUrls
 
 let newPopupWindowId;
 let currentWindow;
@@ -13,6 +16,8 @@ let displayedResources = {
     video: new Set(),
     article: new Set(),
     jeux: new Set(),
+    anecdote: new Set(),
+    image: new Set(),
 };
 
 let isFirstResourceLiked = false
@@ -27,13 +32,17 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('musiqueOption').addEventListener('click', () => changeMessageType('une musique'));
     document.getElementById('articleOption').addEventListener('click', () => changeMessageType('un article'));
     document.getElementById('jeuxOption').addEventListener('click', () => changeMessageType('un jeux'));
+    document.getElementById('anecdoteOption').addEventListener('click', () => fetchTextFromAPI());
+    document.getElementById('anecdoteOption').addEventListener('click', () => changeMessageType('une anecdote'));
+    document.getElementById('imageOption').addEventListener('click', () => fetchImagesFromAPI())
+    document.getElementById('imageOption').addEventListener('click', () => changeMessageType('une image'))
 
-    // Boutons Like et Dislike
+    // Bouttons Like et Dislike
 
     document.getElementById('likeBtn').addEventListener('click', () => likeResource());
     document.getElementById('dislikeBtn').addEventListener('click', () => dislikeResource());
 
-    // ecoute l'evenement de changement du menu dropdown
+    // écoute l'evenement de changement du menu dropdown
     likedResourcesDropdown.addEventListener('change', function () {
         // Ouvrez une nouvelle fenêtre avec l'URL sélectionnée
         openWindow(likedResourcesDropdown.value, 700, 900);
@@ -182,14 +191,23 @@ function displayRandomAvailableResources() {
 
     if (messageType === "une musique") {
         height = 600, width = 900;
+        openWindow(randomUrl, height, width);
     } else if (messageType === "une video") {
         height = 800, width = 1200;
+        openWindow(randomUrl, height, width);
     } else if (messageType === "un article") {
         height = 800, width = 900;
+        openWindow(randomUrl, height, width);
     } else if (messageType === "un jeux") {
         height = 700, width = 1100;
+        openWindow(randomUrl, height, width);
+    } else if (messageType === "une anecdote") {
+        height = 500, width = 700;
+        openWindowWithText(randomUrl, height, width);
+    } else if (messageType === "une image") {
+        height = 700, width = 900;
+        openWindow(randomUrl, height, width);
     }
-    openWindow(randomUrl, height, width);
     return randomUrl
 }
 
@@ -199,7 +217,9 @@ function resetDisplayedResources() {
         musique: new Set(),
         video: new Set(),
         article: new Set(),
-        jeux: new Set()
+        jeux: new Set(),
+        anecdote: new Set(),
+        image: new Set()
     };
 }
 
@@ -215,6 +235,10 @@ function markResourceAsDisplayed(url) {
         currentSet = displayedResources.article;
     } else if (messageType === "un jeux") {
         currentSet = displayedResources.jeux;
+    } else if (messageType === "une anecdote") {
+        currentSet = displayedResources.anecdote;
+    } else if (messageType === "une image") {
+        currentSet = displayedResources.image;
     }
 
     // Marquer la ressource comme affichée
@@ -234,6 +258,10 @@ function getAvailableResources() {
         availableResources = articleUrls.filter(url => !displayedResources.article.has(url));
     } else if (messageType === "un jeux") {
         availableResources = jeuxUrls.filter(url => !displayedResources.jeux.has(url));
+    } else if (messageType === "une anecdote") {
+        availableResources = anecdoteUrls.filter(url => !displayedResources.anecdote.has(url));
+    } else if (messageType === "une image") {
+        availableResources = imageUrls.filter(url => !displayedResources.image.has(url));
     }
 
     // Si toutes les ressources ont été affichées au moins une fois, réinitialiser le set
@@ -285,3 +313,64 @@ function openWindow(url, height, width) {
     });
     console.log(url)
 }
+
+function openWindowWithText(string, height, width) {
+    const left = Math.floor(Math.random() * (screen.width - width));
+    const top = Math.floor(Math.random() * (screen.height - height));
+    let page = `<html><style>body{background-color:darkmagenta; color:white;}</style><body><p> ${string}</p></body></html>`
+    page += `<style>body{display:flex; justify-content:center; align-items:center;}</style>`
+    page += `<style>p{font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:25px;}</style>`
+    page += `<style>p{text-align:center; padding:25px;}</style>`
+    // Si le top est dans la partie haute de l'écran, ajustez-le
+    const adjustedTop = top < screen.height / 4 ? screen.height / 4 : top;
+
+    chrome.windows.create({
+        url: 'data:text/html;charset=utf-8,' + encodeURIComponent(page),
+        type: 'popup',
+        width,
+        height,
+        left,
+        top: adjustedTop,
+    }, function (window) {
+        currentWindow = window;
+    });
+}
+
+// Importez le fichier resources.js si nécessaire
+// import resources from './resources.js';
+
+document.getElementById('Soumettre').addEventListener('click', function () {
+    const linkType = prompt('Choisi le type de lien: video, article, musique, jeux, image').toLowerCase;
+
+    if (linkType === 'video' || linkType === 'article' || linkType === 'musique' || linkType === 'jeux' || linkType === 'image' && linkType.includes(http) == true) {
+        const link = prompt(`Entre le lien ${linkType} :`);
+
+        if (link) {
+            switch (linkType.toLowerCase()) {
+                case 'video':
+                    resources.videoUrls.push(link);
+                    break;
+                case 'article':
+                    resources.articlesUrls.push(link);
+                    break;
+                case 'musique':
+                    resources.musiqueUrls.push(link);
+                    break;
+                case 'jeux':
+                    resources.jeuxUrls.push(link);
+                    break;
+                case 'image':
+                    resources.imageUrls.push(link);
+                    break;
+                default:
+                    alert('Lien non valide.');
+                    return;
+            }
+
+            // Vous pouvez également faire d'autres actions ici, comme afficher un message de confirmation
+            alert(`lien ${linkType} ajoute avec succes!`);
+        }
+    } else {
+        alert(`le type de lien n'est pas valide`)
+    }
+});

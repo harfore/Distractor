@@ -1,8 +1,8 @@
 import resources from './resources.js';
 
 // Maintenant, vous pouvez utiliser les URLs comme ceci :
-const musiqueUrls = resources.musiqueUrls
-const videoUrls = resources.videoUrls
+let musiqueUrls = resources.musiqueUrls
+let videoUrls = resources.videoUrls
 const articleUrls = resources.articlesUrls
 const jeuxUrls = resources.jeuxUrls
 
@@ -18,7 +18,7 @@ let displayedResources = {
 let isFirstResourceLiked = false
 let messageType;
 let likedUrls = new Set();
-let dislikedUrls = new Set();
+let dislikedUrls = [];
 let likedResourcesDropdown;
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ecoute l'evenement de changement du menu dropdown
     likedResourcesDropdown.addEventListener('change', function () {
-            // Ouvrez une nouvelle fenêtre avec l'URL sélectionnée
-            openWindow(likedResourcesDropdown.value, 700, 900);
+        // Ouvrez une nouvelle fenêtre avec l'URL sélectionnée
+        openWindow(likedResourcesDropdown.value, 700, 900);
     });
 });
 
@@ -53,7 +53,6 @@ function likeResource() {
         // Ajoute dynamiquement l'URL likée au menu déroulant
         addLikedResourceToDropdown(currentUrl);
         console.log(currentUrl);
-
     });
 }
 
@@ -67,6 +66,48 @@ function addLikedResourceToDropdown(url) {
 
     // Ajoute l'option au menu déroulant
     likedResourcesDropdown.appendChild(option);
+}
+
+// const dislikeResource = () => {
+//     // const currentUrl = window.location.href;
+//     let currentUrl = '';
+//     getCurrentResourceUrl(function (currentUrl) {
+//         dislikedUrls.push(currentUrl);
+//     });
+//     console.log(`${currentUrl} disliked!`);
+//     dislikedUrls.push(currentUrl);
+//     if (musiqueUrls.includes(currentUrl)) {
+//         musiqueUrls = musiqueUrls.filter(function (item) {
+//             return item !== currentUrl;
+//         });
+//     } else {
+//         console.log('Not the right field!')
+//     }
+//     console.log('Updated musiqueUrls:', musiqueUrls)
+// }
+
+function dislikeResource() {
+    getCurrentResourceUrl(function (currentUrl) {
+        let correctedLink = currentUrl.replace("www.", "").replace("youtube", "youtu.be").replace(".com", "").replace("watch?v=", "");
+        console.log(correctedLink + ' is number one.');
+
+        dislikedUrls.push(correctedLink);
+        console.log(correctedLink)
+        let hasCommonValue = [];
+        let hasCommonValue2 = [];
+        hasCommonValue = dislikedUrls.some(correctedLink => musiqueUrls.includes(correctedLink)); // boolean
+        hasCommonValue2 = dislikedUrls.some(correctedLink => videoUrls.includes(correctedLink));
+        if (hasCommonValue) {
+            musiqueUrls = musiqueUrls.filter(item => item !== correctedLink);
+            console.log(`${correctedLink} disliked!`)
+            console.log('Updated musique URLs: ', musiqueUrls);
+        } else if (hasCommonValue2) {
+            videoUrls = videoUrls.filter(item => item !== correctedLink);
+            console.log('Updated Video URLs: ', videoUrls);
+        } else {
+            console.log("No common value found with dislikedUrls.")
+        }
+    });
 }
 
 function changeMessageType(type) {
@@ -209,4 +250,5 @@ function openWindow(url, height, width) {
     }, function (window) {
         currentWindow = window;
     });
+    console.log(url)
 }

@@ -12,10 +12,10 @@ const resources = {
     "https://youtu.be/Nuanwn3v-2I",
     "https://youtu.be/fYEXdCCpfVQ",
     "https://youtu.be/ovvn5h8VpBo",
-    "https://www.youtube.com/watch?v=rhTl_OyehF8",
-    "https://www.youtube.com/watch?v=fC06V0ZLGwg",
-    'https://www.youtube.com/watch?v=NF-kLy44Hls',
-    'https://www.youtube.com/watch?v=2fDzCWNS3ig'
+    "https://youtu.be/rhTl_OyehF8",
+    "https://youtu.be/fC06V0ZLGwg",
+    'https://youtu.be/NF-kLy44Hls',
+    'https://youtu.be/2fDzCWNS3ig'
   ],
   videoUrls: [
     "https://youtu.be/BGYIXarTNbA",
@@ -27,8 +27,8 @@ const resources = {
     "https://youtu.be/VbeM8Lf7s5A",
     "https://youtu.be/oXAsvg_ZZzk",
     "https://youtu.be/TyUA1OmXMXA",
-    "https://www.youtube.com/watch?v=cqGjhVJWtEg",
-    'https://www.youtube.com/watch?v=qh6K0z7-700&list=PLndQKPttFXMD4SZGqV84TOEQy5hffK5Nv&index=4'
+    "https://youtu.be/cqGjhVJWtEg",
+    'https://youtu.be/qh6K0z7-700&t=1s'
   ],
   articlesUrls: [
     "https://www.legorafi.fr/category/horoscope-2/",

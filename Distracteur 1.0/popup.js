@@ -51,11 +51,30 @@ function likeResource() {
         }
 
         // Ajoute dynamiquement l'URL likée au menu déroulant
+        saveLikedUrlsToLocalStorage();
         addLikedResourceToDropdown(currentUrl);
         console.log(currentUrl);
     });
 }
 
+function saveLikedUrlsToLocalStorage() {
+    const likedUrlsArray = Array.from(likedUrls);
+    localStorage.setItem('likedUrls', JSON.stringify(likedUrlsArray));
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    //load liked URLs from localStorage
+    loadLikedUrlsFromLocalStorage();
+
+    likedResourcesDropdown = document.getElementById('likedResourcesDropdown');
+});
+
+function loadLikedUrlsFromLocalStorage() {
+    const storedLikedUrls = localStorage.getItem('likedUrls');
+    if (storedLikedUrls) {
+        likedUrls = new Set(JSON.parse(storedLikedUrls))
+    }
+}
 
 function addLikedResourceToDropdown(url) {
     // Crée un nouvel élément d'option
@@ -72,8 +91,8 @@ function dislikeResource() {
     try {
         getCurrentResourceUrl(function (currentUrl) {
             let correctedLink = "";
-            if (currentUrl.includes("youtube" || "youtu.be")) {
-                let correctedLink = currentUrl.replace("www.", "").replace("youtube", "youtu.be").replace(".com", "").replace("watch?v=", "");
+            if (currentUrl.includes("youtube") || currentUrl.includes("youtu.be")) {
+                correctedLink = currentUrl.replace("www.", "").replace("youtube", "youtu.be").replace(".com", "").replace("watch?v=", "");
                 console.log('Link after changes: ' + correctedLink);
             } else {
                 correctedLink = currentUrl;
@@ -105,7 +124,23 @@ function dislikeResource() {
     } catch (error) {
         console.error('An error occured while getting the current resorce URL:', error.message)
     }
+    saveDislikedUrlsToLocalStorage();
 };
+
+function saveDislikedUrlsToLocalStorage() {
+    localStorage.setItem('dislikedUrls', JSON.stringify(dislikedUrls))
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    loadDislikedUrlsFromLocalStorage();
+})
+
+function loadDislikedUrlsFromLocalStorage() {
+    const storedDislikedUrls = localStorage.getItem('dislikedUrls');
+    if (storedDislikedUrls) {
+        dislikedUrls = JSON.parse(storedDislikedUrls);
+    }
+}
 
 
 function changeMessageType(type) {

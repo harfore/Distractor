@@ -1,0 +1,149 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #000000;
+    margin: 0;
+    padding: 10px;
+    /* Ajuste la valeur de padding pour réduire la hauteur */
+    color: #ecf0f1;
+    z-index: 999999;
+}
+
+body {
+    color: hsl(242, 93%, 11%);
+    animation: wheelHueColor 100s infinite;
+    background-color: currentColor;
+}
+@supports (background-blend-mode: overlay) {
+    body {
+        background-image: linear-gradient(45deg, white 10%, black 90%);
+        background-blend-mode: overlay;
+    }
+}
+
+#content {
+    text-align: center;
+}
+
+#message {
+    font-family: 'Roboto', sans-serif;
+    /* Changer la police pour le titre */
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #f5f7f8;
+    border-bottom: 2px solid #3498db;
+    /* Ajouter une bordure en dessous du titre */
+    padding-bottom: 10px;
+    /* Espacement entre le titre et le contenu */
+}
+
+#buttonContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    color: black;
+}
+
+.buttonRow {
+    display: flex;
+    gap: 20px;
+}
+
+button {
+    padding: 5px 15px;
+    font-size: 1.2em;
+    cursor: pointer;
+    background-color: #50626e;
+    color: #fff;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease-in-out;
+    box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+button:hover {
+    background-color: #0276c4;
+    color: #ecf0f1;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #ecf0f1;
+}
+
+#image,
+#video {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 30px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+#likeBtn {
+    background-color: green;
+}
+
+#dislikeBtn {
+    background-color: red;
+}
+
+#like {
+    display: flex;
+    justify-content:center;
+    padding: 5px 20px;
+    /* Ajuster la taille des boutons */
+    font-size: 1em;
+    /* Ajuster la taille de la police */
+    width: auto;
+    /* Ajuster la largeur automatiquement */
+    margin-top: 5px;
+    gap: 10px
+}
+
+#likeBtn:active,
+#dislikeBtn:active {
+    background-color: white;
+}
+
+#devil{
+    margin-left: 5px;
+    margin-bottom: -5px;
+    height: 30px;
+    width:auto
+}
+
+#likedResourcesDropdown {
+    width: 100px; /* Ajustez la largeur selon vos besoins */
+    padding: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 5px;
+    border: 1px solid #f3be2b;
+    border-radius: 4px;
+    color: black; /* Assurez-vous que la couleur du texte est définie (par exemple, noir) */
+    background-color: white; /* Assurez-vous que la couleur de fond est définie (par exemple, blanc) */
+    margin-left: 10px; /* Ajoutez cette ligne pour centrer horizontalement */
+
+}
+
+#likedResourcesDropdown option {
+    background-color: #8b8b8b;
+    padding: 8px;
+    cursor:copy;
+  }
+
+#likeBtn:hover {
+    background-color: rgb(5, 218, 5);
+}
+
+#dislikeBtn:hover{
+    background-color: rgb(241, 107, 107);
+}

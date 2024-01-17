@@ -98,6 +98,7 @@ function fetchImagesFromAPI() {
       .then(data => {
         if (data) {
           // Ajouter l'image à la liste des ressources
+          let dataImage;
           dataImage = data[0].url
           resources.imageUrls.push(dataImage);
           console.log("Image récupérée avec succès :", dataImage);

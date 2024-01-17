@@ -6,7 +6,6 @@ chrome.runtime.onInstalled.addListener(function (details) {
     if (details.reason === 'install' || details.reason === 'update') {
         // Fonction pour créer une nouvelle fenêtre popup
         function createRandomPopup() {
-            let currentPopupId;
             if (currentPopupId !== null) {
                 chrome.windows.remove(currentPopupId)
             }

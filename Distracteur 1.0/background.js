@@ -4,6 +4,9 @@ chrome.runtime.onInstalled.addListener(function () {
 
 chrome.runtime.onInstalled.addListener(function (details) {
     if (details.reason === 'install' || details.reason === 'update') {
+
+        let currentPopupId = null;
+
         // Fonction pour créer une nouvelle fenêtre popup
         function createRandomPopup() {
             if (currentPopupId !== null) {
@@ -24,7 +27,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
         }
 
         function getRandomInterval() {
-            return Math.floor((Math.random() * 30) + 1) * 1000
+            return Math.floor((Math.random() * 10) + 4) * 1000
             // (10 * 60 * 1000 - 1 * 60 * 1000 + 1) + 1 * 60 * 1000);
         }
 

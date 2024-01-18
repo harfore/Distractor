@@ -15,7 +15,8 @@ const resources = {
     "https://youtu.be/rhTl_OyehF8",
     "https://youtu.be/fC06V0ZLGwg",
     'https://youtu.be/NF-kLy44Hls',
-    'https://youtu.be/2fDzCWNS3ig'
+    'https://youtu.be/2fDzCWNS3ig',
+    'https://youtu.be/6OkneaH-eTA'
   ],
   videoUrls: [
     "https://youtu.be/BGYIXarTNbA",
@@ -27,7 +28,8 @@ const resources = {
     "https://youtu.be/VbeM8Lf7s5A",
     "https://youtu.be/oXAsvg_ZZzk",
     "https://youtu.be/TyUA1OmXMXA",
-    "https://youtu.be/cqGjhVJWtEg"
+    "https://youtu.be/cqGjhVJWtEg",
+    "https://youtu.be/llgL7mGYVTI&t=121s"
   ],
   articlesUrls: [
     "https://www.legorafi.fr/category/horoscope-2/",
@@ -117,7 +119,6 @@ fetchImagesFromAPI();
 // Utiliser la liste des ressources dans le reste de ton code
 // Par exemple, tu peux utiliser la première image ainsi :
 let firstImage = resources.imageUrls[0]
-console.log("DataImage :", firstImage);
 
 // va chercher une fun fact dans une API
 let dataAnecdote;
@@ -140,7 +141,6 @@ function fetchTextFromAPI() {
       // content += `<style>p{text-align:center; padding:25px;}</style>`
     })
 }
-console.log("dataAnecdote: " + dataAnecdote)
 
 fetchTextFromAPI()
 export { fetchImagesFromAPI, fetchTextFromAPI };

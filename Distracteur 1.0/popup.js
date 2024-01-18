@@ -54,6 +54,7 @@ function likeResource() {
     getCurrentResourceUrl(function (currentUrl) {
         likedUrls.add(currentUrl);
 
+
         if (!isFirstResourceLiked) {
             likedResourcesDropdown.style.display = 'block';
             isFirstResourceLiked = true;
@@ -63,6 +64,7 @@ function likeResource() {
         saveLikedUrlsToLocalStorage();
         addLikedResourceToDropdown(currentUrl);
         console.log(currentUrl);
+        console.log('Liked elements: ', likedUrls);
     });
 }
 
@@ -134,6 +136,7 @@ function dislikeResource() {
         console.error('An error occured while getting the current resorce URL:', error.message)
     }
     saveDislikedUrlsToLocalStorage();
+    changeMessage(messageType);
 };
 
 function saveDislikedUrlsToLocalStorage() {
@@ -336,15 +339,10 @@ function openWindowWithText(string, height, width) {
     });
 }
 
-// Importez le fichier resources.js si nécessaire
-// import resources from './resources.js';
-
 document.getElementById('Soumettre').addEventListener('click', function () {
-    const linkType = prompt('Choisi le type de lien: video, article, musique, jeux, image').toLowerCase;
-
-    if (linkType === 'video' || linkType === 'article' || linkType === 'musique' || linkType === 'jeux' || linkType === 'image' && linkType.includes(http) == true) {
+    const linkType = prompt('Choisi le type de lien: video, article, musique, jeux, image');
+    if (linkType === 'video' || linkType === 'article' || linkType === 'musique' || linkType === 'jeux' || linkType === 'image') {
         const link = prompt(`Entre le lien ${linkType} :`);
-
         if (link) {
             switch (linkType.toLowerCase()) {
                 case 'video':
@@ -366,7 +364,6 @@ document.getElementById('Soumettre').addEventListener('click', function () {
                     alert('Lien non valide.');
                     return;
             }
-
             // Vous pouvez également faire d'autres actions ici, comme afficher un message de confirmation
             alert(`lien ${linkType} ajoute avec succes!`);
         }

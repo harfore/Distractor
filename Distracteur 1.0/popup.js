@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('jeuxOption').addEventListener('click', () => changeMessageType('un jeux'));
     document.getElementById('anecdoteOption').addEventListener('click', () => fetchTextFromAPI());
     document.getElementById('anecdoteOption').addEventListener('click', () => changeMessageType('une anecdote'));
-    document.getElementById('imageOption').addEventListener('click', () => fetchImagesFromAPI())
-    document.getElementById('imageOption').addEventListener('click', () => changeMessageType('une image'))
+    document.getElementById('imageOption').addEventListener('click', () => fetchImagesFromAPI());
+    document.getElementById('imageOption').addEventListener('click', () => changeMessageType('une image'));
 
     // Bouttons Like et Dislike
 

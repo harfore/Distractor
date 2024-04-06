@@ -1,4 +1,6 @@
-Group Project - 3 students, 2 weeks<br /><br />
+# The Distractor <br />
+## Made with @julieATS and @stoyots over 10 days
+
 This Chrome extension (built with HTML, CSS and JavaScript) offers numerous distractions on demand in the shape of a pop-up window whenever you need a break from your work.<br />
 No need to look anything up. We provide articles, video games, catchy songs, fun facts along with captivating videos and even pictures of the most adorable cats and dogs you've ever seen.<br /><br />
 ![presentation](./Distracteur1.0/Images/RDME1.png)<br /><br />
